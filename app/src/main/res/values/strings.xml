@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ProjetoIntegrador3</string>
+    <string name="button">Button</string>
+    <string name="textview">TextView</string>
+</resources>
