@@ -1,5 +1,6 @@
 package com.example.projintegrador
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -21,5 +22,22 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityEscolherServicoBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        binding.btnCalendarioSemanal.setOnClickListener {
+            val NavigateToCalendar = Intent(this, CalendarView::class.java)
+            startActivity(NavigateToCalendar)
+        }
+
+        binding.btnRegistrarPonto.setOnClickListener {
+            val NavigateToRegister = Intent(this, Register::class.java)
+            startActivity(NavigateToRegister)
+        }
+
+        binding.btnRelatorio.setOnClickListener {
+            val NavigateToRelatory = Intent(this, Relatory::class.java)
+            startActivity(NavigateToRelatory)
+        }
+
+
     }
 }
