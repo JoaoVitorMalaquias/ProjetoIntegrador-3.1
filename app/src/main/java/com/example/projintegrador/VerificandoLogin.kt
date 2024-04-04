@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.projintegrador.databinding.ActivityEscolherServicoBinding
 import com.example.projintegrador.databinding.ActivityMainBinding
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -31,9 +32,6 @@ class VerificandoLogin: AppCompatActivity() {
 
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 signInWithEmailAndPassword(email, password)
-                Toast.makeText(this,"Login Efetuado com Sucesso", Toast.LENGTH_SHORT).show()
-                val NavigateToActivityMain = Intent(this, MainActivity::class.java)
-                startActivity(NavigateToActivityMain)
             } else {
                 Toast.makeText(
                     this@VerificandoLogin,
@@ -63,6 +61,9 @@ class VerificandoLogin: AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 Log.d(TAG, "signInWithEmailAndPassword:Success")
+                Toast.makeText(this,"Login Efetuado com Sucesso", Toast.LENGTH_SHORT).show()
+                val navigateToActivityMain = Intent(this, MainActivity::class.java)
+                startActivity(navigateToActivityMain)
                 //val user = auth.currentUser
             } else {
                 Log.w(TAG, "signInUserWithEmailAndPassword:Failure", task.exception)
