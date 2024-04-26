@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">ProjIntegrador</string>
+    <string name="alterarSenha"><u>Alterar Senha</u></string>
+    <string name="cadastarUsuario"><u>Cadastrar Usuário</u></string>
+    <string name="voltar"><u>Voltar</u></string>
 </resources>

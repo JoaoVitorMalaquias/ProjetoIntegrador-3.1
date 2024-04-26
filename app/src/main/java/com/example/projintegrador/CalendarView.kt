@@ -6,6 +6,7 @@ import android.app.DatePickerDialog.OnDateSetListener
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.util.Log
+import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -25,12 +26,14 @@ import java.util.logging.SimpleFormatter
 
 class CalendarView : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
     private lateinit var binding: ActivityCalendarBinding
+
+    val listaDiasSemanas = listOf("Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado")
     private val calendar = Calendar.getInstance() //criando o calendario
     private val formatter = SimpleDateFormat("MMM. dd, yyyy", Locale.US)
 
 
     private val database: FirebaseDatabase = Firebase.database
-    private val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    private val dateFormatter = SimpleDateFormat("EEEE", Locale("pt", "BR"))
     private val timeFormatter = SimpleDateFormat("HH:mm", Locale.getDefault())
 
 
@@ -65,15 +68,6 @@ class CalendarView : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         }
 
 
-        binding.btnSelecionarData.setOnClickListener{
-            DatePickerDialog(this,
-                this,
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH)
-            ).show()
-        }
-
         binding.btnSelecionarHora.setOnClickListener{
             val cal = calendar
             val timeSetListener = TimePickerDialog.OnTimeSetListener{timePicker, hour, minute ->
@@ -90,17 +84,31 @@ class CalendarView : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
             ).show()
         }
 
+
+        val adapterItems = ArrayAdapter<String>(this, R.layout.dropdown_menu_dias, listaDiasSemanas)
+        binding.diaSemana.setAdapter(adapterItems)
+
+        // Adiciona um ouvinte de eventos para o dropdown menu
+        binding.diaSemana.setOnItemClickListener { parent, _, position, _ ->
+            // Obtém o item selecionado no dropdown menu
+            val selectedItem = parent.adapter.getItem(position).toString()
+            val formato = SimpleDateFormat("EEEE", Locale("pt", "BR"))
+            calendar.time = formato.parse(selectedItem)!!
+            binding.viewDate.text = selectedItem
+        }
+
     }
 
 
 
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-        Log.e("Calendar", "$year -- $month -- $dayOfMonth")
-        calendar.set(year,month, dayOfMonth)
+        calendar.set(Calendar.YEAR, year)
+        calendar.set(Calendar.MONTH, month)
+        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
         displayFormattedDate(calendar.timeInMillis)
-
     }
+
 
     private fun displayFormattedDate(timestamp: Long){
         binding.viewDate.text = formatter.format(timestamp)

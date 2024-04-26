@@ -14,9 +14,6 @@ android {
         viewBinding = true
     }
 
-
-
-
     defaultConfig {
         applicationId = "com.example.projintegrador"
         minSdk = 24
@@ -57,6 +54,8 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.firebase.auth)
     implementation(libs.firebase.database.ktx)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     //biblioteca autentication firebase

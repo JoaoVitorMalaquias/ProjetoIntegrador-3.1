@@ -20,19 +20,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
         binding.btnCalendarioSemanal.setOnClickListener {
-            val NavigateToCalendar = Intent(this, CalendarView::class.java)
-            startActivity(NavigateToCalendar)
+            val navigateToCalendar = Intent(this, CalendarView::class.java)
+            startActivity(navigateToCalendar)
         }
 
         binding.btnRegistrarPonto.setOnClickListener {
-            val NavigateToRegister = Intent(this, Register::class.java)
-            startActivity(NavigateToRegister)
+            val navigateToRegister = Intent(this, Register::class.java)
+            startActivity(navigateToRegister)
         }
 
         binding.btnRelatorio.setOnClickListener {
-            val NavigateToRelatory = Intent(this, Relatory::class.java)
-            startActivity(NavigateToRelatory)
+            val navigateToRelatory = Intent(this, Relatory::class.java)
+            startActivity(navigateToRelatory)
         }
+
 
 
     }

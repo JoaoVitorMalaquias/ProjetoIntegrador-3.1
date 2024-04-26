@@ -8,21 +8,28 @@
     android:background="@drawable/clean"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/btnSelecionarData"
-        android:layout_width="wrap_content"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/laranja"
-        android:text="Selecionar Data"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="30dp"
-        android:textStyle="bold"
+        android:layout_margin="16dp"
+        app:boxBackgroundColor="@color/cinza"
+        android:hint="Selecione o Dia"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.272" />
+        app:layout_constraintVertical_bias="0.211">
+
+        <AutoCompleteTextView
+            android:id="@+id/diaSemana"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            tools:ignore="LabelFor" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/viewDate"
@@ -33,7 +40,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btnSelecionarHora"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSelecionarData"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
         app:layout_constraintVertical_bias="0.089" />
 
 
@@ -41,6 +48,7 @@
         android:id="@+id/btnSelecionarHora"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="292dp"
         android:backgroundTint="@color/laranja"
         android:text="Selecionar Hora"
         android:textAlignment="center"
@@ -49,10 +57,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/btnSelecionarData"
-        app:layout_constraintVertical_bias="0.384" />
+        app:layout_constraintTop_toTopOf="@id/textInputLayout"
+        app:layout_constraintVertical_bias="0.924" />
 
     <TextView
         android:id="@+id/viewTime"
@@ -75,8 +83,10 @@
         android:text="Salvar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewTime" />
+        app:layout_constraintTop_toBottomOf="@+id/viewTime"
+        app:layout_constraintVertical_bias="0.331" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

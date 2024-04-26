@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
 import com.example.projintegrador.databinding.ActivityEscolherServicoBinding
 import com.example.projintegrador.databinding.ActivityMainBinding
 import com.google.firebase.Firebase
@@ -41,7 +42,17 @@ class VerificandoLogin: AppCompatActivity() {
             }
         }
 
+        binding?.btnAlterarSenha?.setOnClickListener {
+            //val navToAlterarSenha = Intent(this, AlterarSenha::class.java)
+            //startActivity(navToAlterarSenha)
+        }
+
+        binding?.btnCadastrarUsuario?.setOnClickListener {
+            val navToCadastrarUsuario = Intent(this, CadastrarUsuario::class.java)
+            startActivity(navToCadastrarUsuario)
+        }
     }
+
 
     //Funcao para criar um usuario, porém não sera utilizada
     //private fun createUserWithEmailAndPassword(email:String, password:String){
