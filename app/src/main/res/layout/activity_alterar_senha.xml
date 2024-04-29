@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/clean"
+    tools:context=".AlterarSenha">
+
+
+
+    <View
+        android:id="@+id/conteinerLogin"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/container_login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498" />
+
+    <TextView
+        android:id="@+id/txtTittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="Alterar Senha"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/conteinerLogin"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@id/conteinerLogin"
+        app:layout_constraintTop_toTopOf="@id/conteinerLogin" />
+
+    <TextView
+        android:id="@+id/txtDesc"
+        android:layout_width="344dp"
+        android:layout_height="58dp"
+        android:text="Insira seus dados e você receberá um email para alterar sua senha"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/conteinerLogin"
+        app:layout_constraintStart_toStartOf="@id/conteinerLogin"
+        app:layout_constraintTop_toBottomOf="@id/txtTittle" />
+
+
+    <EditText
+        android:id="@+id/editUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/container_edit_text_login"
+        android:hint="E-mail"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:padding="15dp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@id/conteinerLogin"
+        app:layout_constraintStart_toStartOf="@id/conteinerLogin"
+        app:layout_constraintTop_toBottomOf="@id/txtTittle" />
+
+    <Button
+        android:id="@+id/btnAlterarSenha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="@color/blue"
+        android:padding="15dp"
+        android:text="Enviar email"
+        app:layout_constraintBottom_toBottomOf="@+id/conteinerLogin"
+        app:layout_constraintEnd_toEndOf="@id/conteinerLogin"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@id/conteinerLogin" />
+
+    <TextView
+        android:id="@+id/btnVoltar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/voltar"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnAlterarSenha"
+        app:layout_constraintEnd_toEndOf="@+id/conteinerLogin"
+        app:layout_constraintStart_toStartOf="@+id/conteinerLogin"
+        app:layout_constraintTop_toBottomOf="@+id/editUser" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

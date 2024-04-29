@@ -43,8 +43,8 @@ class VerificandoLogin: AppCompatActivity() {
         }
 
         binding?.btnAlterarSenha?.setOnClickListener {
-            //val navToAlterarSenha = Intent(this, AlterarSenha::class.java)
-            //startActivity(navToAlterarSenha)
+            val navToAlterarSenha = Intent(this, AlterarSenha::class.java)
+            startActivity(navToAlterarSenha)
         }
 
         binding?.btnCadastrarUsuario?.setOnClickListener {

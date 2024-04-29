@@ -1,5 +1,6 @@
 package com.example.projintegrador
 
+import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
@@ -40,8 +41,8 @@ class CadastrarUsuario : AppCompatActivity() {
         }
 
         binding?.btnVoltar?.setOnClickListener {
-            val navToMainActivity = Intent(this, MainActivity::class.java)
-            startActivity(navToMainActivity)
+            val navToVerificandoLogin = Intent(this, VerificandoLogin::class.java)
+            startActivity(navToVerificandoLogin)
         }
     }
 
