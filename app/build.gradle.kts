@@ -61,4 +61,8 @@ dependencies {
     //biblioteca autentication firebase
     implementation("com.google.firebase:firebase-auth-ktx")
     androidTestImplementation(libs.androidx.espresso.core)
+
+
+    //localizacao
+    implementation("com.google.android.gms:play-services-location:21.2.0")
 }
