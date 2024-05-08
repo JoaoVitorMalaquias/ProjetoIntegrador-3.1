@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "41215051593",
+    "project_id": "projetointegrador-f365d",
+    "storage_bucket": "projetointegrador-f365d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:41215051593:android:ba169267bb1687e9cdfc98",
+        "android_client_info": {
+          "package_name": "com.example.projintegrador"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBwklQp5sp92cGH5ZbmulKPiBWihUFX5E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
