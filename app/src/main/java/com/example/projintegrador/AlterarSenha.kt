@@ -47,6 +47,11 @@ class AlterarSenha : AppCompatActivity() {
                 ).show()
             }
         }
+
+        binding?.imageButton?.setOnClickListener{
+            val navToVerificandoLogin = Intent(this, VerificandoLogin::class.java)
+            startActivity(navToVerificandoLogin)
+        }
     }
 
     private fun mandaEmail(email: String) {

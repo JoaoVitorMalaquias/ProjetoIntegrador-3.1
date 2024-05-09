@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
@@ -82,6 +83,12 @@ class CalendarView : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
             val formato = SimpleDateFormat("EEEE", Locale("pt", "BR"))
             calendar.time = formato.parse(selectedItem)!!
             binding.viewDate.text = selectedItem
+        }
+
+
+        binding.imageButton.setOnClickListener{
+            val navToMain = Intent(this, MainActivity::class.java)
+            startActivity(navToMain)
         }
 
     }

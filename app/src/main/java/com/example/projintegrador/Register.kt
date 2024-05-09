@@ -88,6 +88,12 @@ class Register : AppCompatActivity() {
                 }
             }
         }
+
+        binding?.imageButton?.setOnClickListener{
+            val navToMain = Intent(this, MainActivity::class.java)
+            startActivity(navToMain)
+        }
+
     }
 
     private fun verificarRegistroDeEntrada(callback: (Boolean) -> Unit) {

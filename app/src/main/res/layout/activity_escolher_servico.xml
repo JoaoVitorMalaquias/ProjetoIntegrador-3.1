@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/clean">
 
+
     <TextView
         android:id="@+id/bemVindo"
         android:layout_width="wrap_content"
@@ -15,11 +16,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.053" />
-
+        app:layout_constraintVertical_bias="0.073" />
 
     <TextView
         android:id="@+id/textView"
@@ -30,11 +30,9 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/bemVindo"
-        app:layout_constraintVertical_bias="0.0760" />
-
+        app:layout_constraintVertical_bias="0.083" />
 
     <ImageButton
         android:id="@+id/btnCalendarioSemanal"
@@ -78,5 +76,17 @@
         app:srcCompat="@drawable/relatorio"
         tools:ignore="MissingConstraints" />
 
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/bemVindo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.005"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.107"
+        app:srcCompat="@drawable/back" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

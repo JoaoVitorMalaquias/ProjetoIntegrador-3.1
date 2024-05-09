@@ -35,7 +35,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(navigateToRelatory)
         }
 
-
+        binding.imageButton.setOnClickListener{
+            val navLogin = Intent(this, VerificandoLogin::class.java)
+            startActivity(navLogin)
+        }
 
     }
 }

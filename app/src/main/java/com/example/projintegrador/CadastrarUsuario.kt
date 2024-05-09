@@ -44,6 +44,13 @@ class CadastrarUsuario : AppCompatActivity() {
             val navToVerificandoLogin = Intent(this, VerificandoLogin::class.java)
             startActivity(navToVerificandoLogin)
         }
+
+        binding?.imageButton?.setOnClickListener{
+            val navToVerificandoLogin = Intent(this, VerificandoLogin::class.java)
+            startActivity(navToVerificandoLogin)
+        }
+
+
     }
 
     private fun createUserWithEmailAndPassword(email: String, password: String) {

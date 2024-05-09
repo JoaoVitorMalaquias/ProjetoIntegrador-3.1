@@ -1,5 +1,6 @@
 package com.example.projintegrador
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projintegrador.databinding.ActivityCalendarBinding
@@ -31,6 +32,12 @@ class Relatory: AppCompatActivity() {
 
 
         exibirRelatorioHorasTrabalhadas()
+
+        binding?.imageButton?.setOnClickListener{
+            val navToMain = Intent(this, MainActivity::class.java)
+            startActivity(navToMain)
+        }
+
 
     }
 
