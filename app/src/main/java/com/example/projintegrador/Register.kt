@@ -161,10 +161,10 @@ class Register : AppCompatActivity() {
                     if (snapshot.exists()) {
                         val registroAtual = snapshot.children.lastOrNull { it.child("tipo").getValue(String::class.java) == "entrada" }
                         if (registroAtual != null) {
-                            registroAtual.ref.child("tipo").setValue("saida")
-                            registroAtual.ref.child("ponto").setValue(horaMinutoSalvo)
+                            // Adiciona a saída ao mesmo nó onde a entrada foi registrada
+                            registroAtual.ref.child("tipoSaida").setValue("saida")
+                            registroAtual.ref.child("pontoSaida").setValue(horaMinutoSalvo)
                             registroAtual.ref.child("timestampSaida").setValue(timestamp)
-
 
                             val horaEntrada = registroAtual.child("ponto").getValue(String::class.java)
                             if (horaEntrada != null) {
@@ -183,11 +183,9 @@ class Register : AppCompatActivity() {
                             voltarParaMain()
                         }
                     } else {
-                        // Se não houver nenhum registro para o dia atual, crie um novo registro de saída
-                        val novoRegistroRef = referencia.push()
-                        novoRegistroRef.child("tipo").setValue("saida")
-                        novoRegistroRef.child("ponto").setValue(horaMinutoSalvo)
-                        novoRegistroRef.child("timestamp").setValue(timestamp)
+                        // Se não houver nenhum registro para o dia atual, exiba uma mensagem de erro
+                        Toast.makeText(this@Register, "Erro: Nenhum registro encontrado para o dia atual", Toast.LENGTH_SHORT).show()
+                        voltarParaMain()
                     }
                 }
 

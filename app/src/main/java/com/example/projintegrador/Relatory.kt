@@ -52,11 +52,16 @@ class Relatory: AppCompatActivity() {
                 // Itera sobre os registros para calcular o total de horas trabalhadas
                 for (registro in snapshot.children) {
                     val tipo = registro.child("tipo").getValue(String::class.java)
-                    val timestampEntrada = registro.child("timestamp").getValue(Long::class.java)
-                    val timestampSaida = registro.child("timestampSaida").getValue(Long::class.java)
+                    val pontoEntrada = registro.child("ponto").getValue(String::class.java)
+                    val pontoSaida = registro.child("pontoSaida").getValue(String::class.java)
 
-                    if (tipo == "entrada" && timestampSaida != null) {
-                        horasTrabalhadasMillis += timestampSaida - timestampEntrada!!
+                    if (tipo == "entrada" && pontoSaida != null) {
+                        // Converte os pontos de entrada e saída em milissegundos desde a meia-noite
+                        val horaEntradaMillis = converterHoraParaMillis(pontoEntrada!!)
+                        val horaSaidaMillis = converterHoraParaMillis(pontoSaida)
+
+                        // Calcula a diferença entre os pontos de entrada e saída em milissegundos
+                        horasTrabalhadasMillis += horaSaidaMillis - horaEntradaMillis
                     }
                 }
 
@@ -74,6 +79,14 @@ class Relatory: AppCompatActivity() {
                 // Trate o erro, se necessário
             }
         })
+    }
+
+    private fun converterHoraParaMillis(hora: String): Long {
+        val parts = hora.split(":")
+        val horaInt = parts[0].toInt()
+        val minutoInt = parts[1].toInt()
+        // Calcula os milissegundos desde a meia-noite
+        return (horaInt * 60 * 60 * 1000 + minutoInt * 60 * 1000).toLong()
     }
 
     private fun getUserId(): String {
