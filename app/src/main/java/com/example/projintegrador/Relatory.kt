@@ -33,7 +33,7 @@ class Relatory: AppCompatActivity() {
 
         exibirRelatorioHorasTrabalhadas()
 
-        binding?.imageButton?.setOnClickListener{
+        binding.imageButton.setOnClickListener{
             val navToMain = Intent(this, MainActivity::class.java)
             startActivity(navToMain)
         }

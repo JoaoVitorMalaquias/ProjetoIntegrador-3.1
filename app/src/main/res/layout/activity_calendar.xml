@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="292dp"
         android:backgroundTint="@color/laranja"
-        android:text="Selecionar Hora"
+        android:text="Selecionar Hora Entrada"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="30dp"
@@ -64,7 +64,24 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/textInputLayout"
-        app:layout_constraintVertical_bias="0.924" />
+        app:layout_constraintVertical_bias="0.611" />
+
+    <Button
+        android:id="@+id/btnSelecionarHoraSaida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/laranja"
+        android:text="Selecionar Hora Saida"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnSalvarNoBD"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/btnSelecionarHora"
+        app:layout_constraintVertical_bias="0.745" />
 
     <TextView
         android:id="@+id/viewTime"
@@ -73,12 +90,27 @@
         android:text=""
         android:textSize="20dp"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/btnSalvarNoBD"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSelecionarHora"
         app:layout_constraintVertical_bias="0.043" />
+
+
+    <TextView
+        android:id="@+id/viewTime2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@id/btnSalvarNoBD"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSelecionarHora"
+        app:layout_constraintVertical_bias="0.674" />
 
     <Button
         android:id="@+id/btnSalvarNoBD"
@@ -91,8 +123,8 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/viewTime"
-        app:layout_constraintVertical_bias="0.331" />
-
+        android:visibility="invisible"
+        app:layout_constraintVertical_bias="0.579" />
 
     <ImageButton
         android:id="@+id/imageButton"

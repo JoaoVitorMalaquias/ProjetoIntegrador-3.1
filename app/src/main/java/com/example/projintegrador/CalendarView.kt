@@ -18,7 +18,10 @@ import com.example.projintegrador.databinding.ActivityCalendarBinding
 import com.example.projintegrador.databinding.ActivityMainBinding
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
 import java.sql.Time
 import java.text.SimpleDateFormat
@@ -50,10 +53,7 @@ class CalendarView : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         val view = binding.root
         setContentView(view)
 
-        binding.btnSalvarNoBD.setOnClickListener {
-            salvarDataEHoraNoFirebase()
-            limparTextViews()
-        }
+
 
 
         binding.btnSelecionarHora.setOnClickListener{
@@ -62,6 +62,8 @@ class CalendarView : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
                 cal.set(Calendar.HOUR_OF_DAY, hour)
                 cal.set(Calendar.MINUTE, minute)
                 binding.viewTime.text =  SimpleDateFormat("HH:mm").format(cal.time)
+                salvarDataEHoraNoFirebase()
+
             }
 
             TimePickerDialog(this,
@@ -70,6 +72,29 @@ class CalendarView : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
                 cal.get(Calendar.MINUTE),
                 true
             ).show()
+
+
+        }
+
+
+        binding.btnSelecionarHoraSaida.setOnClickListener {
+            val cal = calendar
+            val timeSetListener = TimePickerDialog.OnTimeSetListener{timePicker, hour, minute ->
+                cal.set(Calendar.HOUR_OF_DAY, hour)
+                cal.set(Calendar.MINUTE, minute)
+                binding.viewTime2.text =  SimpleDateFormat("HH:mm").format(cal.time)
+                salvarHoraSaidaNoFirebase()
+
+            }
+
+            TimePickerDialog(this,
+                timeSetListener,
+                cal.get(Calendar.HOUR_OF_DAY),
+                cal.get(Calendar.MINUTE),
+                true
+            ).show()
+
+
         }
 
 
@@ -104,14 +129,50 @@ class CalendarView : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
         val reference = database.reference.child("datas").child(userId).child(listaDiasSemanas[diaDaSemana - 1]) // Adiciona o ID do usuário e o dia da semana ao caminho do nó
         val novoHorario = reference.push()
-        novoHorario.child("hora").setValue(horaSelecionada)
+        novoHorario.child("horaEntrada").setValue(horaSelecionada)
             .addOnSuccessListener {
-                Toast.makeText(this, "Data e hora salvas no Firebase com sucesso", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Hora de entrada salva no Firebase com sucesso", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener {
-                Toast.makeText(this, "Falha ao salvar data e hora no Firebase: ${it.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Falha ao salvar hora de entrada no Firebase: ${it.message}", Toast.LENGTH_SHORT).show()
             }
+
+        // Adiciona a hora de saída no mesmo nó e chave que a hora de entrada
+        novoHorario.child("horaSaida").setValue("") // Inicialmente, a hora de saída será vazia
     }
+
+    private fun salvarHoraSaidaNoFirebase() {
+        val userId = getUserId() // Obtém o ID do usuário atual
+
+        val diaDaSemana = calendar.get(Calendar.DAY_OF_WEEK)
+        val dataSelecionada = dateFormatter.format(calendar.time)
+        val horaSelecionada = timeFormatter.format(calendar.time)
+
+        val reference = database.reference.child("datas").child(userId).child(listaDiasSemanas[diaDaSemana - 1]) // Adiciona o ID do usuário e o dia da semana ao caminho do nó
+        val ultimoHorario = reference.limitToLast(1) // Obtém o último horário adicionado
+        ultimoHorario.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    for (childSnapshot in snapshot.children) {
+                        // Atualiza a hora de saída para o último horário adicionado
+                        childSnapshot.ref.child("horaSaida").setValue(horaSelecionada)
+                            .addOnSuccessListener {
+                                Toast.makeText(this@CalendarView, "Hora de saída salva no Firebase com sucesso", Toast.LENGTH_SHORT).show()
+                            }
+                            .addOnFailureListener {
+                                Toast.makeText(this@CalendarView, "Falha ao salvar hora de entrada no Firebase: ${it.message}", Toast.LENGTH_SHORT).show()
+                            }
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Trate o erro, se necessário
+                Log.e("Firebase", "Erro ao acessar o Firebase: ${error.message}")
+            }
+        })
+    }
+
 
 
     private fun getUserId(): String {

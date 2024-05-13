@@ -81,8 +81,15 @@ class Register : AppCompatActivity() {
         binding?.btnResgistrarPonto?.setOnClickListener {
 
             verificarRegistroDeEntrada { registroExiste ->
-                if (registroExiste) {
-                    registrarPontoSaida()
+                if (registroExiste)
+                    verificarHorarioSaidaPermitido { horarioSaidaPermitido ->
+                        if (horarioSaidaPermitido) {
+                            registrarPontoSaida()
+                        } else {
+                            // Hora de saída não permitida
+                            Toast.makeText(this@Register, "Erro: Hora de saída não permitida para o dia selecionado", Toast.LENGTH_SHORT).show()
+                            voltarParaMain()
+                        }
                 } else {
                     registrarPontoEntrada()
                 }
@@ -233,7 +240,7 @@ class Register : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     for (childSnapshot in snapshot.children) {
-                        val horaPermitida = childSnapshot.child("hora").getValue(String::class.java)
+                        val horaPermitida = childSnapshot.child("horaEntrada").getValue(String::class.java)
                         if (horaPermitida != null) {
                             val horaAtual = SimpleDateFormat("HH:mm").format(Date())
                             if (horaAtual == horaPermitida) {
@@ -260,6 +267,45 @@ class Register : AppCompatActivity() {
             }
         })
     }
+
+
+    private fun verificarHorarioSaidaPermitido(callback: (Boolean) -> Unit) {
+        val diaDaSemanaAtual = getDiaDaSemanaAtual()
+
+        val referencia = database.getReference("datas").child(userId).child(diaDaSemanaAtual)
+
+        referencia.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    for (childSnapshot in snapshot.children) {
+                        val horaPermitida = childSnapshot.child("horaSaida").getValue(String::class.java)
+                        if (horaPermitida != null) {
+                            val horaAtual = SimpleDateFormat("HH:mm").format(Date())
+                            if (horaAtual == horaPermitida) {
+                                // Hora atual é igual à hora permitida
+                                callback(true)
+                                return
+                            }
+                        }
+                    }
+                }
+                // Nenhuma hora permitida encontrada para o dia selecionado ou não há dados
+                callback(false)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Trate o erro, se necessário
+                Log.e("Firebase", "Erro ao acessar o Firebase: ${error.message}")
+                callback(false)
+            }
+        })
+    }
+
+
+
+
+
+
 
 
     @SuppressLint("MissingPermission")
@@ -309,9 +355,10 @@ class Register : AppCompatActivity() {
 
     private fun estaNaLocalizacaoDesejada(location: Location?): Boolean {
         // Coordenadas da localização desejada (exemplo)
-        val latitudeDesejada = -22.83450045123378
+
+        val latitudeDesejada = -22.8204
         //val longitudeDesejada = -190.05276164551796
-        val longitudeDesejada = -47.05276164551796
+        val longitudeDesejada = -47.2775
 
         // Verifique se a localização atual não é nula
         if (location != null) {
